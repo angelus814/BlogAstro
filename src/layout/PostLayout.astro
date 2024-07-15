@@ -1,0 +1,29 @@
+---
+const { frontmatter } = Astro.props;
+import BaseLayout from "./BaseLayout.astro";
+import Tags from "../componentes/Tags.astro";
+const allPosts = await Astro.glob("../pages/posts/*.md")
+const tags = [...new Set(allPosts.map(valor => valor.frontmatter.tags).flat())]
+---
+<style>
+    .img{
+        background-color: #131313;
+        display: inline-block;
+    }
+    a {
+      color: #00539F;
+    }
+ 
+</style>
+<BaseLayout titulo={frontmatter.title}>
+
+    
+    <p>{frontmatter.pubDate.toString().slice(0,10)}</p>
+    <p><em>{frontmatter.description}</em></p>
+    <p>Escrito por: {frontmatter.author}</p>
+    <div class="img">
+        <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+    </div>
+    <Tags tags={tags}/>
+    <slot />
+</BaseLayout>    

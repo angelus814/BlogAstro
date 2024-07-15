@@ -1,6 +1,6 @@
 ---
-import { literal } from "astro/zod";
-
+import Navegacion from "../componentes/Navegacion.astro"
+import BaseLayout from "../layout/BaseLayout.astro";
 const pageTitle = "Sobre mi";
 
 const identity = {
@@ -15,38 +15,38 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Redacción de do
 const happy = true;
 const finished = true;
 const goal = 3;
----
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-        <a href="/">Inicio</a>
-        <a href="/about">Sobre mi</a>
-        <a href="/blog">Mi Blog</a>
-		<h2>Mi sitio Astro</h2>
-        <h2>{pageTitle}</h2>
-        <h2>Algunos detalles sobre mi: </h2>
-        <p>Mi nombre: {identity.firstName}</p>
-        <p>Ciudad de origen: {identity.country}</p>
-        <p>Ocupacion : {identity.occupation}</p>
-        <p>Mis hobbies: </p>
-        {identity.hobbies.length >= 2 ? identity.hobbies.map(valor => 
-            <li>{valor}</li>
-        ) : <li>Mi hobbi es : {identity.hobbies[0]}</li> }
-        <p>Mis habilidades</p>
-        <ul>
-            {skills.map(valor =>
+const color = `#09f`
+---
+        <style define:vars = {{color}}>
+            h2{
+                width: fit-content;
+                background-color: var(--color);
+                color: white;
+            }
+            .skill{
+                color: green;
+                font-weight: bolder;
+            }
+        </style>
+        <BaseLayout titulo="About">
+		    <h2>Mi sitio Astro</h2>
+            <h2>{pageTitle}</h2>
+            <h2>Algunos detalles sobre mi: </h2>
+            <p>Mi nombre: {identity.firstName}</p>
+            <p>Ciudad de origen: {identity.country}</p>
+            <p>Ocupacion : {identity.occupation}</p>
+            <p>Mis hobbies: </p>
+            {identity.hobbies.length >= 2 ? identity.hobbies.map(valor => 
                 <li>{valor}</li>
-            )}
-        </ul>
-        {happy && <p>Estoy feliz por aprender astro</p>}
-        {finished && <p>He terminado este tutorial</p>}
-        {goal === 3 ? <p>Lo he terminado en 3 dias</p> :  <p>No seran 3 dias</p> }
-    </body>
-</html>
+            ) : <li>Mi hobbi es : {identity.hobbies[0]}</li> }
+            <p>Mis habilidades</p>
+            <ul>
+                {skills.map(valor =>
+                    <li class="skill">{valor}</li>
+                )}
+            </ul>
+            {happy && <p>Estoy feliz por aprender astro</p>}
+            {finished && <p>He terminado este tutorial</p>}
+            {goal === 3 ? <p>Lo he terminado en 3 dias</p> :  <p>No seran 3 dias</p> }
+        </BaseLayout>

@@ -1,0 +1,9 @@
+---
+    const {red, userName} = Astro.props
+---
+<style>
+    a{
+        font-weight: bolder;
+    }
+</style>
+<a href={`https://www.${red}.com/${userName}`}>{red}</a>

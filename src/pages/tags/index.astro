@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layout/BaseLayout.astro"
+import Tags from "../../componentes/Tags.astro"
+const allTags = await Astro.glob("../posts/*.md")
+const tags = [...new Set(allTags.map(valor => valor.frontmatter.tags).flat())]
+---
+<BaseLayout titulo="tags">
+    <h2>Mis tags</h2>
+    <Tags tags={tags}>
+</BaseLayout>
